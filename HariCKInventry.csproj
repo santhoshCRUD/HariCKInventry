@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- EF Core base package -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
+    <!-- EF Core design-time package for migrations -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <!-- PostgreSQL provider -->
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
+
+    <!-- Your existing package -->
     <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="10.0.1" />
   </ItemGroup>
 

@@ -18,24 +18,25 @@ namespace HariCKInventry.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Unique ProductId
             modelBuilder.Entity<Product>()
                 .HasIndex(p => p.ProductId)
                 .IsUnique();
 
-            // Relationships
+            // Product → Category (many-to-one)
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.Category)
-                .WithMany(c => c.SubCategories.SelectMany(sc => sc.Id == sc.Id ? new List<Product>() : new List<Product>()))
+                .WithMany(c => c.Products)   // <-- simple property
                 .HasForeignKey(p => p.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // Product → SubCategory (many-to-one)
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.SubCategory)
-                .WithMany()
+                .WithMany(sc => sc.Products) // <-- simple property
                 .HasForeignKey(p => p.SubCategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // Product → PrintingParameter (one-to-one)
             modelBuilder.Entity<PrintingParameter>()
                 .HasOne(pp => pp.Product)
                 .WithOne(p => p.PrintingParameter)

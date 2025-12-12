@@ -14,5 +14,6 @@ namespace HariCKInventry.Models
         public string? Description { get; set; }
 
         public List<SubCategory> SubCategories { get; set; } = new();
+        public List<Product> Products { get; set; } = new();
     }
 }
