@@ -1,7 +1,65 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "HariCK Inventry";
+    ViewData["Title"] = "HariCK Inventory";
 }
-<h2>Welcome to HariCK Inventry</h2>
-<p>Manage categories, subcategories, and 3D products with STL and photos. Use the navigation above.</p>
+
+<!-- Hero Section -->
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <h1 class="fw-bold display-5 text-dark">
+            Welcome to <span class="text-primary" style="font-size:50px">HariCK Inventory</span>
+        </h1>
+        <p class="lead text-secondary mt-3">
+            Streamline your 3D printing business—manage categories, subcategories, STL files, and product photos
+            with a clean and powerful inventory system.
+        </p>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="row justify-content-center mt-5 g-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100 hover-scale">
+                <div class="card-body text-center">
+                    <i class="bi bi-boxes fs-1 text-primary"></i>
+                    <h5 class="card-title mt-3 fw-semibold">Product Management</h5>
+                    <p class="text-muted">Create, update, and organize all 3D printed products with STL and images.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100 hover-scale">
+                <div class="card-body text-center">
+                    <i class="bi bi-grid-1x2 fs-1 text-success"></i>
+                    <h5 class="card-title mt-3 fw-semibold">Categories & Subcategories</h5>
+                    <p class="text-muted">Easily categorize parts for smooth navigation and reporting.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100 hover-scale">
+                <div class="card-body text-center">
+                    <i class="bi bi-clipboard-data fs-1 text-warning"></i>
+                    <h5 class="card-title mt-3 fw-semibold">Reports & Analytics</h5>
+                    <p class="text-muted">Get insights into your inventory, product usage, and performance trends.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Optional Hover Scale Style -->
+<style>
+    .hover-scale {
+        transition: transform 0.2s ease;
+    }
+
+        .hover-scale:hover {
+            transform: scale(1.03);
+        }
+</style>

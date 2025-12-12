@@ -9,17 +9,17 @@ var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL")
     ?? builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Convert Render-style DATABASE_URL if needed
-if (connectionString.StartsWith("postgres://") || connectionString.StartsWith("postgresql://"))
+var envUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+if (!string.IsNullOrWhiteSpace(envUrl) &&
+    (envUrl.StartsWith("postgres://") || envUrl.StartsWith("postgresql://")))
 {
-    // postgres://user:pass@host:port/db
-    var uri = new Uri(connectionString.Replace("postgres://", "postgresql://"));
+    var uri = new Uri(envUrl.Replace("postgres://", "postgresql://"));
     var userInfo = uri.UserInfo.Split(':');
     var port = uri.Port > 0 ? uri.Port : 5432;  // default to 5432
 
     connectionString =
         $"Host={uri.Host};Port={port};Database={uri.AbsolutePath.Trim('/')};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true";
 }
-
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseNpgsql(connectionString));
 

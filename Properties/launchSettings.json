@@ -13,18 +13,20 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5286",
+      "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DATABASE_URL": "postgresql://harickinventry_db_user:LJgJHcp0eFsnf2tAQ0eUmq8Oz3WH0vBP@dpg-d4u3a4mr433s73d9g97g-a.singapore-postgres.render.com/harickinventry_db"
       }
     },
     "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7259;http://localhost:5286",
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DATABASE_URL": "postgresql://harickinventry_db_user:LJgJHcp0eFsnf2tAQ0eUmq8Oz3WH0vBP@dpg-d4u3a4mr433s73d9g97g-a.singapore-postgres.render.com/harickinventry_db"
       }
     },
     "IIS Express": {
