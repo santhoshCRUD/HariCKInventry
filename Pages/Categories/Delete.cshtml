@@ -1,0 +1,13 @@
+﻿@page "{id:int}"
+@model HariCKInventry.Pages.Categories.DeleteModel
+@{
+    ViewData["Title"] = "Delete Category";
+}
+<h2>Delete Category</h2>
+
+<p>Are you sure you want to delete '@Model.Category?.Name'?</p>
+
+<form method="post">
+    <button type="submit">Delete</button>
+    <a asp-page="Index">Cancel</a>
+</form>

@@ -1,0 +1,25 @@
+﻿@page "{id:int}"
+@model HariCKInventry.Pages.Categories.EditModel
+@{
+    ViewData["Title"] = "Edit Category";
+}
+<h2>Edit Category</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Category.Id" />
+    <div>
+        <label>Name</label>
+        <input asp-for="Category.Name" />
+        <span asp-validation-for="Category.Name"></span>
+    </div>
+    <div>
+        <label>Description</label>
+        <input asp-for="Category.Description" />
+        <span asp-validation-for="Category.Description"></span>
+    </div>
+    <button type="submit">Update</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

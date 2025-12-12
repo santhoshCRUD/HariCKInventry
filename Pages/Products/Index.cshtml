@@ -1,0 +1,69 @@
+﻿@page
+@model HariCKInventry.Pages.Products.IndexModel
+
+<h2>Products</h2>
+<p><a asp-page="Create">Add Product</a></p>
+
+<form method="get">
+    <input type="text" name="q" value="@Model.q" placeholder="Search by name or product ID" />
+    <button type="submit">Search</button>
+    <a asp-page="Index">Clear</a>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>SubCategory</th>
+            <th>Dims (L×W×H mm)</th>
+            <th>Weight (g)</th>
+            <th>Print Time (min)</th>
+            <th>Cost</th>
+            <th>Files</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model.Products)
+        {
+            <tr>
+                <td>@p.ProductId</td>
+                <td>@p.Name</td>
+                <td>@p.Category?.Name</td>
+                <td>@p.SubCategory?.Name</td>
+                <td>@p.Length × @p.Width × @p.Height</td>
+                <td>@p.Weight</td>
+                <td>@p.PrintTimeMinutes</td>
+                <td>@p.Cost</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(p.StlPath))
+                    {
+                        <a href="@p.StlPath" target="_blank">STL</a>
+                    }
+                    @if (!string.IsNullOrEmpty(p.Photo1Path))
+                    {
+                        <a href="@p.Photo1Path" target="_blank">Photo1</a>
+                    }
+                    @if (!string.IsNullOrEmpty(p.Photo2Path))
+                    {
+                        <a href="@p.Photo2Path" target="_blank">Photo2</a>
+                    }
+                    @if (!string.IsNullOrEmpty(p.Photo3Path))
+                    {
+                        <a href="@p.Photo3Path" target="_blank">Photo3</a>
+                    }
+                    @if (!string.IsNullOrEmpty(p.Photo4Path))
+                    {
+                        <a href="@p.Photo4Path" target="_blank">Photo4</a>
+                    }
+                </td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@p.Id">Edit</a> |
+                    <a asp-page="Delete" asp-route-id="@p.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,30 @@
+﻿@page
+@model HariCKInventry.Pages.SubCategories.IndexModel
+
+<h2>SubCategories</h2>
+<p><a asp-page="Create">Create New</a></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model.SubCategories)
+        {
+            <tr>
+                <td>@s.Name</td>
+                <td>@s.Category?.Name</td>
+                <td>@s.Description</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@s.Id">Edit</a> |
+                    <a asp-page="Delete" asp-route-id="@s.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

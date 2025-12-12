@@ -1,0 +1,77 @@
+﻿@page "{id:int}"
+@model HariCKInventry.Pages.Products.EditModel
+@{
+    ViewData["Title"] = "Edit Product";
+}
+<h2>Edit Product</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Product.Id" />
+    <fieldset>
+        <legend>Basic info</legend>
+        <div><label>Product ID</label><input asp-for="Product.ProductId" /><span asp-validation-for="Product.ProductId"></span></div>
+        <div><label>Name</label><input asp-for="Product.Name" /><span asp-validation-for="Product.Name"></span></div>
+        <div><label>Category</label><select asp-for="Product.CategoryId" asp-items="Model.CategoriesSelect"></select><span asp-validation-for="Product.CategoryId"></span></div>
+        <div><label>SubCategory</label><select asp-for="Product.SubCategoryId" asp-items="Model.SubCategoriesSelect"></select><span asp-validation-for="Product.SubCategoryId"></span></div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Dimensions & cost</legend>
+        <div><label>Length (mm)</label><input asp-for="Product.Length" /><span asp-validation-for="Product.Length"></span></div>
+        <div><label>Width (mm)</label><input asp-for="Product.Width" /><span asp-validation-for="Product.Width"></span></div>
+        <div><label>Height (mm)</label><input asp-for="Product.Height" /><span asp-validation-for="Product.Height"></span></div>
+        <div><label>Weight (g)</label><input asp-for="Product.Weight" /><span asp-validation-for="Product.Weight"></span></div>
+        <div><label>Print time (min)</label><input asp-for="Product.PrintTimeMinutes" /><span asp-validation-for="Product.PrintTimeMinutes"></span></div>
+        <div><label>Cost</label><input asp-for="Product.Cost" /><span asp-validation-for="Product.Cost"></span></div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Printing parameters</legend>
+        <input type="hidden" asp-for="PrintingParameter.ProductId" />
+        <div><label>Material</label><input asp-for="PrintingParameter.Material" /></div>
+        <div><label>Color</label><input asp-for="PrintingParameter.Color" /></div>
+        <div><label>Layer height (mm)</label><input asp-for="PrintingParameter.LayerHeight" /></div>
+        <div><label>Infill (%)</label><input asp-for="PrintingParameter.InfillPercent" /></div>
+        <div><label>Nozzle temp (°C)</label><input asp-for="PrintingParameter.NozzleTemp" /></div>
+        <div><label>Bed temp (°C)</label><input asp-for="PrintingParameter.BedTemp" /></div>
+        <div><label>Printer model</label><input asp-for="PrintingParameter.PrinterModel" /></div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Uploads</legend>
+        <div><label>STL</label><input type="file" asp-for="StlFile" accept=".stl" /></div>
+        <div><label>Photo 1</label><input type="file" asp-for="Photo1" accept=".jpg,.jpeg,.png,.webp" /></div>
+        <div><label>Photo 2</label><input type="file" asp-for="Photo2" accept=".jpg,.jpeg,.png,.webp" /></div>
+        <div><label>Photo 3</label><input type="file" asp-for="Photo3" accept=".jpg,.jpeg,.png,.webp" /></div>
+        <div><label>Photo 4</label><input type="file" asp-for="Photo4" accept=".jpg,.jpeg,.png,.webp" /></div>
+        <p>
+            Existing:
+            @if (!string.IsNullOrEmpty(Model.Product.StlPath))
+            {
+                <a href="@Model.Product.StlPath" target="_blank">STL</a>
+            }
+            @if (!string.IsNullOrEmpty(Model.Product.Photo1Path))
+            {
+                <a href="@Model.Product.Photo1Path" target="_blank">Photo1</a>
+            }
+            @if (!string.IsNullOrEmpty(Model.Product.Photo2Path))
+            {
+                <a href="@Model.Product.Photo2Path" target="_blank">Photo2</a>
+            }
+            @if (!string.IsNullOrEmpty(Model.Product.Photo3Path))
+            {
+                <a href="@Model.Product.Photo3Path" target="_blank">Photo3</a>
+            }
+            @if (!string.IsNullOrEmpty(Model.Product.Photo4Path))
+            {
+                <a href="@Model.Product.Photo4Path" target="_blank">Photo4</a>
+            }
+        </p>
+    </fieldset>
+
+    <button type="submit">Update</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

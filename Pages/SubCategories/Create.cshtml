@@ -1,0 +1,29 @@
+﻿@page
+@model HariCKInventry.Pages.SubCategories.CreateModel
+@{
+    ViewData["Title"] = "Create SubCategory";
+}
+<h2>Create SubCategory</h2>
+
+<form method="post">
+    <div>
+        <label>Name</label>
+        <input asp-for="SubCategory.Name" />
+        <span asp-validation-for="SubCategory.Name"></span>
+    </div>
+    <div>
+        <label>Category</label>
+        <select asp-for="SubCategory.CategoryId" asp-items="Model.CategoriesSelect"></select>
+        <span asp-validation-for="SubCategory.CategoryId"></span>
+    </div>
+    <div>
+        <label>Description</label>
+        <input asp-for="SubCategory.Description" />
+        <span asp-validation-for="SubCategory.Description"></span>
+    </div>
+    <button type="submit">Save</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>HariCK Inventry</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav>
+            <a asp-page="/Index">Home</a> |
+            <a asp-page="/Categories/Index">Categories</a> |
+            <a asp-page="/SubCategories/Index">SubCategories</a> |
+            <a asp-page="/Products/Index">Products</a>
+        </nav>
+    </header>
+    <div class="container">
+        @RenderBody()
+    </div>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
