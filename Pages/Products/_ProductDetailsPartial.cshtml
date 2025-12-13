@@ -1,75 +1,112 @@
-﻿@page
-@model HariCKInventry.Pages.Products.CreateModel
-@{
+﻿@model HariCKInventry.Models.Product
+
+@if (Model == null)
+{
+    <div class="alert alert-danger">Product not found.</div>
 }
-<div class="modal-header">
-    <h5 class="modal-title" id="productViewModalLabel">Cooking...🥘</h5>
-</div>
-<div class="modal fade" id="productViewModal1" tabindex="-1" aria-labelledby="productViewModalLabel" aria-hidden="true" hidden>
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="productViewModalLabel">Product Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+else
+{
+    <!-- Basic Information -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-light fw-semibold">Basic Information</div>
+        <div class="card-body row g-3">
+            <div class="col-md-4">
+                <label class="form-label">Product ID</label>
+                <p><span>@Model.ProductId</span></p>
             </div>
-            <div class="modal-body">
-
-                <!-- Basic Information -->
-                <h6 class="fw-semibold">Basic Information</h6>
-                <p><strong>Product ID:</strong> @Model.Product.ProductId</p>
-                <p><strong>Name:</strong> @Model.Product.Name</p>
-                <p><strong>Description:</strong> @Model.Product.Description</p>
-                <p><strong>Category:</strong> @Model.CategoriesSelect.FirstOrDefault(c => c.Value == Model.Product.CategoryId.ToString())?.Text</p>
-                <p><strong>Sub Category:</strong> @Model.SubCategoriesSelect.FirstOrDefault(sc => sc.Value == Model.Product.SubCategoryId.ToString())?.Text</p>
-                <hr />
-
-                <!-- Dimensions & Cost -->
-                <h6 class="fw-semibold">Dimensions & Cost</h6>
-                <p><strong>Length:</strong> @Model.Product.Length mm</p>
-                <p><strong>Width:</strong> @Model.Product.Width mm</p>
-                <p><strong>Height:</strong> @Model.Product.Height mm</p>
-                <p><strong>Weight:</strong> @Model.Product.Weight g</p>
-                <p><strong>Print Time:</strong> @Model.Product.PrintTimeMinutes min</p>
-                <p><strong>Cost:</strong> @Model.Product.Cost</p>
-                <hr />
-
-                <!-- Printing Parameters -->
-                <h6 class="fw-semibold">Printing Parameters</h6>
-                <p><strong>Material:</strong> @Model.PrintingParameter.Material</p>
-                <p><strong>Color:</strong> @Model.PrintingParameter.Color</p>
-                <p><strong>Layer Height:</strong> @Model.PrintingParameter.LayerHeight</p>
-                <p><strong>Infill %:</strong> @Model.PrintingParameter.InfillPercent</p>
-                <p><strong>Nozzle Temp:</strong> @Model.PrintingParameter.NozzleTemp °C</p>
-                <p><strong>Bed Temp:</strong> @Model.PrintingParameter.BedTemp °C</p>
-                <p><strong>Printer Model:</strong> @Model.PrintingParameter.PrinterModel</p>
-                <hr />
-
-                <!-- Files -->
-                <h6 class="fw-semibold">Files</h6>
-                @if (Model.StlFile != null)
-                {
-                    <p>
-                        <strong>STL File:</strong>
-                        <a href="@Url.Page("Download", new { fileId = Model.Product.ProductId, type = "stl" })" target="_blank">Download</a>
-                    </p>
-                }
-
-                @for (int i = 1; i <= 4; i++)
-                {
-                    var photo = (IFormFile)typeof(HariCKInventry.Pages.Products.CreateModel).GetProperty($"Photo{i}")?.GetValue(Model);
-                    if (photo != null)
-                    {
-                        <p>
-                            <strong>Photo @i:</strong>
-                            <img src="@Url.Page("Download", new { fileId = Model.Product.ProductId, type = $"photo{i}" })" class="img-fluid mb-2" style="max-height:150px;" />
-                        </p>
-                    }
-                }
-
+            <div class="col-md-8">
+                <label class="form-label">Name</label>
+                <p><span>@Model.Name</span></p>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <div class="col-md-8">
+                <label class="form-label">Description</label>
+                <p><span>@Model.Description</span></p>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Category</label>
+                <p><span>@Model.Category?.Name</span></p>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Sub Category</label>
+                <p><span>@Model.SubCategory?.Name</span></p>
             </div>
         </div>
     </div>
-</div>
+
+    <!-- Dimensions & Cost -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-light fw-semibold">Dimensions & Cost</div>
+        <div class="card-body row g-3">
+            <div class="col-md-4"><label class="form-label">Length (mm)</label><p><span>@Model.Length</span></p></div>
+            <div class="col-md-4"><label class="form-label">Width (mm)</label><p><span>@Model.Width</span></p></div>
+            <div class="col-md-4"><label class="form-label">Height (mm)</label><p><span>@Model.Height</span></p></div>
+            <div class="col-md-4"><label class="form-label">Weight (g)</label><p><span>@Model.Weight</span></p></div>
+            <div class="col-md-4"><label class="form-label">Print Time (min)</label><p><span>@Model.PrintTimeMinutes</span></p></div>
+            <div class="col-md-4"><label class="form-label">Cost</label><p><span>@Model.Cost</span></p></div>
+        </div>
+    </div>
+
+    <!-- Printing Parameters -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-light fw-semibold">Printing Parameters</div>
+        <div class="card-body row g-3">
+            <div class="col-md-4"><label class="form-label">Material</label><p><span>@Model.PrintingParameter?.Material</span></p></div>
+            <div class="col-md-4"><label class="form-label">Color</label><p><span>@Model.PrintingParameter?.Color</span></p></div>
+            <div class="col-md-4"><label class="form-label">Layer Height</label><p><span>@Model.PrintingParameter?.LayerHeight</span></p></div>
+            <div class="col-md-4"><label class="form-label">Infill (%)</label><p><span>@Model.PrintingParameter?.InfillPercent</span></p></div>
+            <div class="col-md-4"><label class="form-label">Nozzle Temp (°C)</label><p><span>@Model.PrintingParameter?.NozzleTemp</span></p></div>
+            <div class="col-md-4"><label class="form-label">Bed Temp (°C)</label><p><span>@Model.PrintingParameter?.BedTemp</span></p></div>
+            <div class="col-md-6"><label class="form-label">Printer Model</label><p><span>@Model.PrintingParameter?.PrinterModel</span></p></div>
+        </div>
+    </div>
+
+    <!-- Files / Photos -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-light fw-semibold">Files</div>
+        <div class="card-body row g-3">
+            @* <div class="col-md-6">
+                <label class="form-label">STL File</label>
+                @if (!string.IsNullOrEmpty(Model.StlPath))
+                {
+                    <iframe src="@Url.Content(Model.StlPath)" width="100%" height="300" frameborder="0"></iframe>
+                }
+                else
+                {
+                    <p class="text-muted">No STL file uploaded</p>
+                }
+            </div> *@
+            <div class="col-md-6">
+                <label class="form-label">Photo 1</label>
+                @if (!string.IsNullOrEmpty(Model.Photo1Path))
+                {
+                    <img src="@Url.Content(Model.Photo1Path)" class="img-fluid rounded" />
+                }
+                else
+                {
+                    <p class="text-muted">No photo uploaded</p>
+                }
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Photo 2</label>
+                @if (!string.IsNullOrEmpty(Model.Photo2Path))
+                {
+                    <img src="@Url.Content(Model.Photo2Path)" class="img-fluid rounded" />
+                }
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Photo 3</label>
+                @if (!string.IsNullOrEmpty(Model.Photo3Path))
+                {
+                    <img src="@Url.Content(Model.Photo3Path)" class="img-fluid rounded" />
+                }
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Photo 4</label>
+                @if (!string.IsNullOrEmpty(Model.Photo4Path))
+                {
+                    <img src="@Url.Content(Model.Photo4Path)" class="img-fluid rounded" />
+                }
+            </div>
+        </div>
+    </div>
+}

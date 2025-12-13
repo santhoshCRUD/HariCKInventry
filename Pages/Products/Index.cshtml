@@ -5,7 +5,6 @@
 }
 <script>
     function loadProduct(productId) {
-        return
         const loader = document.getElementById("productDetailsLoader");
         const content = document.getElementById("productDetailsContent");
 
@@ -170,21 +169,29 @@
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
 
+            <!-- Header -->
             <div class="modal-header">
                 <h5 class="modal-title">Product Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <!-- X button: closes modal only -->
+                <a asp-page="Index" class="btn-close"></a>
             </div>
 
+            <!-- Body -->
             <div class="modal-body">
-                <div id="productDetailsLoader" class="text-center py-4" >
-                    @*<div class="spinner-border text-primary"></div> *@      
-                    <img src="~/img/cooking.gif" style="width:70px;" />
+                <div id="productDetailsLoader" class="text-center py-4">
+                    <div class="spinner-border text-primary"></div>
                 </div>
-                <div><span style="color:black">Not yet cooked!</span></div>
 
                 <div id="productDetailsContent" class="d-none">
                     <!-- Partial HTML will be injected here -->
                 </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer">
+                <a asp-page="Index" class="btn btn-outline-secondary">
+                    ← Back to List
+                </a>
             </div>
 
         </div>

@@ -42,6 +42,8 @@ namespace HariCKInventry.Data
                 .WithOne(p => p.PrintingParameter)
                 .HasForeignKey<PrintingParameter>(pp => pp.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+           
         }
     }
 }
