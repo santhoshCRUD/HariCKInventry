@@ -58,6 +58,7 @@ namespace HariCKInventry.Pages.Products
             // Update scalar fields
             existing.ProductId = Product.ProductId;
             existing.Name = Product.Name;
+            existing.Description = Product.Description;
             existing.CategoryId = Product.CategoryId;
             existing.SubCategoryId = Product.SubCategoryId;
             existing.Length = Product.Length;

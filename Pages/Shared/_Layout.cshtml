@@ -11,35 +11,54 @@
     <style>
         /* Zoho Inventory Gradient */
         body {
-            background: linear-gradient(135deg, skyblue, silver);
+            background: aliceblue;
             min-height: 100vh;
             background-attachment: fixed;
             background-repeat: no-repeat;
             color: #ffffff;
         }
 
-        /* Glass / Frosted Navbar */
+        /* ================================
+           Glass / Frosted Navbar
+        ================================ */
         .navbar-glass {
-            background: rgba(0, 0, 0, 0.25);
+            background-color: #fff7dd;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         }
-
+            
+            /* Nav links base */
             .navbar-glass .nav-link {
-                color: #e8fdf8 !important;
+                color: saddlebrown !important;
                 font-weight: 500;
+                padding: 8px 14px;
+                border-radius: 8px;
+                transition: all 0.25s ease;
             }
 
-                .navbar-glass .nav-link.active {
-                    color: #ffffff !important;
-                    font-weight: 700;
-                    border-bottom: 2px solid #ffffff;
+                /* Hover effect */
+                .navbar-glass .nav-link:hover {
+                    background: rgba(255, 255, 255, 0.25);
+                    color: black !important;
                 }
 
-        .navbar-brand {
-            font-weight: 600;
-            color: #ffffff !important;
+                /* Active (current page) */
+                .navbar-glass .nav-link.active {
+                    background: brown;
+                    color: black !important;
+                    font-weight: 600;
+                }
+
+                /* Optional: Click feedback */
+                .navbar-glass .nav-link:active {
+                    transform: scale(0.96);
+                }
+        .navbar-nav-logout{
+            color: saddlebrown !important;
+            font-weight: bold;
+            padding: 8px 14px;
+            border-radius: 8px;
+            justify-content: flex-end;
         }
 
         /* Transparent Footer */
@@ -59,50 +78,99 @@
             margin-top: 30px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
+
+        .navbar-brand{
+        color: !important;  
+        font-weight:bold;
+        font:large;
+        font-family:'Book Antiqua';
+            line-height: 1.6;
+            padding: 25px;
+            font-size: 35px;
+        }
+
+        .nav-left-cornor-logo{
+            width: 42px!important;
+        }
+
+        .navbar-expand-lg .navbar-collapse {
+            display: flex !important;
+            justify-content: flex-end;
+        }
     </style>
 </head>
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-glass">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-page="/Index">HariCKInventory</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    @{
+        var isLoggedIn = Context.Session.GetString("IsLoggedIn") == "true";
+    }
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+    @if (isLoggedIn)
+    {
+        <nav class="navbar navbar-expand-lg navbar-glass">
+            <div class="container-fluid">
+                <img src="~/img/left-cornor-logo.png" class="nav-left-cornor-logo" />
+                <a class="navbar-brand" asp-page="/HomePage">
+                     HariCKInventory
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                    <li class="nav-item">
-                        <a class="nav-link @(ViewData["Title"]?.ToString() == "Home" ? "active" : "")"
-                           asp-page="/Index">Home</a>
+                <div class="collapse navbar-collapse" id="navbarNav" >
+                    <nav class="navbar navbar-expand-lg navbar-glass">
+                        <div class="container-fluid">
+                          
+
+                            <div class="collapse navbar-collapse" id="navbarNav">
+
+                                <!-- LEFT MENU -->
+                                <ul class="navbar-nav mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link @(ViewData["Title"]?.ToString() == "HomePage" ? "active" : "")"
+                                           asp-page="/HomePage">Home</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link @(ViewData["Title"]?.ToString() == "Categories" ? "active" : "")"
+                                           asp-page="/Categories/Index">Categories</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link @(ViewData["Title"]?.ToString() == "Sub Categories" ? "active" : "")"
+                                           asp-page="/SubCategories/Index">Sub Categories</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link @(ViewData["Title"]?.ToString() == "Products" ? "active" : "")"
+                                           asp-page="/Products/Index">Products</a>
+                                    </li>
+
+                                   @*  <li class="nav-item">
+                                        <a class="nav-link @(ViewData["Title"]?.ToString() == "Reports" ? "active" : "")"
+                                           asp-page="/Reports/Index">Reports</a>
+                                    </li> *@
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    </nav>
+
+                </div>
+
+                
+            </div>
+            <div >
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-nav-logout">
+                    <li class="nav-item" >
+                        <a class="nav-link" asp-page="/Logout"><span style="color:darkorange">Logout</span> <span style="color:midnightblue">(@Context.Session.GetString("Username"))</span></a>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link @(ViewData["Title"]?.ToString() == "Categories" ? "active" : "")"
-                           asp-page="/Categories/Index">Categories</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link @(ViewData["Title"]?.ToString() == "SubCategories" ? "active" : "")"
-                           asp-page="/SubCategories/Index">Sub Categories</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link @(ViewData["Title"]?.ToString() == "Products" ? "active" : "")"
-                           asp-page="/Products/Index">Products</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link @(ViewData["Title"]?.ToString() == "Reports" ? "active" : "")"
-                           asp-page="/Reports/Index">Reports</a>
-                    </li>
-
                 </ul>
             </div>
-        </div>
-    </nav>
+        </nav>       
+    }
 
     <!-- Main content -->
     <div class="container main-container">

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HariCKInventry.Pages.Categories
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePage
     {
         private readonly AppDbContext _db;
         public IndexModel(AppDbContext db) => _db = db;

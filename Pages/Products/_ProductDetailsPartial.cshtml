@@ -1,0 +1,75 @@
+﻿@page
+@model HariCKInventry.Pages.Products.CreateModel
+@{
+}
+<div class="modal-header">
+    <h5 class="modal-title" id="productViewModalLabel">Cooking...🥘</h5>
+</div>
+<div class="modal fade" id="productViewModal1" tabindex="-1" aria-labelledby="productViewModalLabel" aria-hidden="true" hidden>
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productViewModalLabel">Product Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <!-- Basic Information -->
+                <h6 class="fw-semibold">Basic Information</h6>
+                <p><strong>Product ID:</strong> @Model.Product.ProductId</p>
+                <p><strong>Name:</strong> @Model.Product.Name</p>
+                <p><strong>Description:</strong> @Model.Product.Description</p>
+                <p><strong>Category:</strong> @Model.CategoriesSelect.FirstOrDefault(c => c.Value == Model.Product.CategoryId.ToString())?.Text</p>
+                <p><strong>Sub Category:</strong> @Model.SubCategoriesSelect.FirstOrDefault(sc => sc.Value == Model.Product.SubCategoryId.ToString())?.Text</p>
+                <hr />
+
+                <!-- Dimensions & Cost -->
+                <h6 class="fw-semibold">Dimensions & Cost</h6>
+                <p><strong>Length:</strong> @Model.Product.Length mm</p>
+                <p><strong>Width:</strong> @Model.Product.Width mm</p>
+                <p><strong>Height:</strong> @Model.Product.Height mm</p>
+                <p><strong>Weight:</strong> @Model.Product.Weight g</p>
+                <p><strong>Print Time:</strong> @Model.Product.PrintTimeMinutes min</p>
+                <p><strong>Cost:</strong> @Model.Product.Cost</p>
+                <hr />
+
+                <!-- Printing Parameters -->
+                <h6 class="fw-semibold">Printing Parameters</h6>
+                <p><strong>Material:</strong> @Model.PrintingParameter.Material</p>
+                <p><strong>Color:</strong> @Model.PrintingParameter.Color</p>
+                <p><strong>Layer Height:</strong> @Model.PrintingParameter.LayerHeight</p>
+                <p><strong>Infill %:</strong> @Model.PrintingParameter.InfillPercent</p>
+                <p><strong>Nozzle Temp:</strong> @Model.PrintingParameter.NozzleTemp °C</p>
+                <p><strong>Bed Temp:</strong> @Model.PrintingParameter.BedTemp °C</p>
+                <p><strong>Printer Model:</strong> @Model.PrintingParameter.PrinterModel</p>
+                <hr />
+
+                <!-- Files -->
+                <h6 class="fw-semibold">Files</h6>
+                @if (Model.StlFile != null)
+                {
+                    <p>
+                        <strong>STL File:</strong>
+                        <a href="@Url.Page("Download", new { fileId = Model.Product.ProductId, type = "stl" })" target="_blank">Download</a>
+                    </p>
+                }
+
+                @for (int i = 1; i <= 4; i++)
+                {
+                    var photo = (IFormFile)typeof(HariCKInventry.Pages.Products.CreateModel).GetProperty($"Photo{i}")?.GetValue(Model);
+                    if (photo != null)
+                    {
+                        <p>
+                            <strong>Photo @i:</strong>
+                            <img src="@Url.Page("Download", new { fileId = Model.Product.ProductId, type = $"photo{i}" })" class="img-fluid mb-2" style="max-height:150px;" />
+                        </p>
+                    }
+                }
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

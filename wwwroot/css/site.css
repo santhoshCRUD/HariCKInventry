@@ -1,4 +1,4 @@
-/* ===== Common Styles for HariCKInventry ===== */
+/* ===== Common Styles for HariCKInventory (Smoke White Theme) ===== */
 
 /* Typography & Layout */
 html {
@@ -18,29 +18,54 @@ html {
 
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    background-color:azure;
+    background-color: #f5f5f5; /* Smoke white */
     margin: 0;
     padding: 0;
     margin-bottom: 60px;
+    color: #2f3437;
 }
 
 /* Headings */
 h1, h2, h3, h4 {
     font-weight: 600;
-    color: #343a40;
+    color: #2e3439;
 }
 
 /* Navbar */
 .navbar {
     margin-bottom: 20px;
+    background-color: #ffffff; /* clean white */
+    border-bottom: 1px solid #e3e6ea;
 }
 
 /* Card */
 .card {
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-radius: 10px;
+    border: 1px solid #e6e9ec;
 }
 
+.table th {
+    font-weight: 600;
+    color: #495057;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.form-label {
+    color: #495057;
+}
+
+.card {
+    border-radius: 14px;
+}
 
 /* Buttons */
 .btn:focus,
@@ -48,19 +73,26 @@ h1, h2, h3, h4 {
 .btn-link.nav-link:focus,
 .form-control:focus,
 .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem #ffffff, 0 0 0 0.25rem rgba(37,140,251,0.35);
 }
 
+/* Primary button */
 .btn-primary {
-    background-color: #0069d9;
-    border-color: #0062cc;
+    background-color: #258cfb;
+    border-color: #1f7ae0;
 }
 
+    .btn-primary:hover {
+        background-color: #1f7ae0;
+    }
+
+/* Warning */
 .btn-warning {
-    background-color: #ffc107;
-    border-color: #e0a800;
+    background-color: #f7c948;
+    border-color: #e0b63c;
 }
 
+/* Danger */
 .btn-danger {
     background-color: #dc3545;
     border-color: #c82333;
@@ -68,11 +100,12 @@ h1, h2, h3, h4 {
 
 /* Footer */
 footer {
-    background-color: #f1f1f1;
-    padding: 10px;
+    background-color: #f0f2f5;
+    padding: 12px;
     text-align: center;
     color: #6c757d;
     font-size: 0.9rem;
+    border-top: 1px solid #e3e6ea;
 }
 
 /* ===== Form Elements ===== */
@@ -84,17 +117,19 @@ input[type="password"],
 input[type="number"],
 textarea,
 select {
-    border: 1px solid #ced4da;
-    border-radius: 6px;
-    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 10px 12px;
     width: 100%;
     transition: all 0.2s ease-in-out;
-    background-color: #fff;
+    background-color: #ffffff;
 }
 
-    input:focus, textarea:focus, select:focus {
+    input:focus,
+    textarea:focus,
+    select:focus {
         border-color: #258cfb;
-        box-shadow: 0 0 5px rgba(37,140,251,0.4);
+        box-shadow: 0 0 0 3px rgba(37,140,251,0.15);
         outline: none;
     }
 
@@ -114,7 +149,7 @@ span.text-danger {
 /* General spans */
 span {
     font-size: 0.9rem;
-    color: #343a40;
+    color: #2f3437;
 }
 
 /* Form groups */
@@ -133,221 +168,49 @@ span {
 
 /* ===== Alerts & Notifications ===== */
 .alert {
-    border-radius: 6px;
-    padding: 12px 20px;
+    border-radius: 8px;
+    padding: 12px 18px;
     margin-bottom: 15px;
+    border: 1px solid transparent;
 }
 
 .alert-success {
-    background-color: #d4edda;
-    color: #155724;
+    background-color: #eaf7ef;
+    color: #1e7e34;
+    border-color: #cce9d6;
 }
 
 .alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
+    background-color: #fdecea;
+    color: #a71d2a;
+    border-color: #f5c6cb;
 }
 
 .alert-warning {
-    background-color: #fff3cd;
+    background-color: #fff7e0;
     color: #856404;
+    border-color: #ffe8a1;
 }
 
 .alert-info {
-    background-color: #d1ecf1;
-    color: #0c5460;
+    background-color: #e8f2ff;
+    color: #084298;
+    border-color: #b6d4fe;
 }
 
 /* ===== Modal Styling ===== */
 .modal-content {
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+    border: none;
 }
 
 .modal-header {
-    background-color: #343a40;
-    color: #fff;
+    background-color: #f5f5f5;
+    color: #2f3437;
     border-bottom: 1px solid #dee2e6;
 }
 
 .modal-footer {
     border-top: 1px solid #dee2e6;
-}
-
-/* Medium Blue Submit Button */
-.btn-submit,button[type="submit"] {
-    display: inline-block;
-    padding: 10px 20px; /* medium size */
-    font-size: 1rem;
-    font-weight: 500;
-    color: #fff;
-    background-color: #007bff; /* blue */
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    margin-top:5px;
-}
-
-    /* Hover effect */
-    .btn-submit, button[type="submit"]:hover {
-        background-color: #0056b3; /* darker blue */
-        transform: translateY(-2px); /* slight lift */
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
-    /* Click (active) effect */
-    .btn-submit, button[type="submit"]:active {
-        background-color: #004085; /* even darker blue */
-        transform: translateY(0); /* reset lift */
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-
-    /* Focus outline */
-    .btn-submit, button[type="submit"]:focus {
-        outline: none;
-        box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.5);
-    }
-
-.field-validation-error {
-    color:red;
-}
-
-/* Highlight active nav link */
-.navbar .nav-link.active {
-    color: #fff !important;
-    background-color: #007bff; /* blue highlight */
-    border-radius: 6px;
-    padding: 6px 12px;
-}
-
-/* Hover effect for nav links */
-.navbar .nav-link:hover {
-    color: #fff;
-    background-color: #0056b3;
-    border-radius: 6px;
-}
-a {
-    /* Basic Button Styling */
-    display: inline-block; /* Allows setting padding, width, and height */
-    padding: 2px 5px; /* Vertical (top/bottom) and Horizontal (left/right) padding */
-    margin: 5px; /* Adds a small margin around each "button" */
-    font-size: 12px; /* Makes the text slightly larger */
-    font-weight: bold; /* Makes the text stand out */
-    text-align: center;
-    text-decoration: none; /* Removes the default underline */
-    cursor: pointer; /* Ensures the hand pointer shows up */
-    /* Visual Button Look */
-    color: #ffffff; /* White text color */
-    background-color: #007bff; /* A standard blue color for the button */
-    border: 1px solid #007bff; /* Solid border matching the background */
-    border-radius: 3px; /* Slightly rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lift effect */
-    /* Smooth Transition for Hover Effects */
-    transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
-}
-
-    /* Hover State: What happens when the mouse is over the link */
-    a:hover {
-        background-color: #0056b3; /* A darker blue on hover */
-        border-color: #0056b3;
-        transform: translateY(-1px); /* Moves the button up slightly */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* A more pronounced shadow */
-    }
-
-    /* Active State: What happens when the button is clicked/pressed */
-    a:active {
-        background-color: #004085; /* Even darker blue when active */
-        border-color: #004085;
-        transform: translateY(0); /* Pushes the button back down */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Returns to a smaller shadow */
-    }
-/* --- Elegant Table Enhancements --- */
-
-/* =========================================== */
-/* === Datatable / Excel Style with !important === */
-/* =========================================== */
-
-/* Table Container - Enforce 100% width and clean collapse */
-/* =========================================== */
-/* === GLOBAL LINK STYLES (Your Original Button Look) === */
-/* =========================================== */
-
-
-/* =========================================== */
-/* === DATATABLE/EXCEL STYLE (Applies to class="table") === */
-/* =========================================== */
-
-/* Table Container */
-.table {
-    width: 100% !important;
-    border-collapse: collapse !important;
-    border: 1px solid #ced4da !important;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05) !important;
-    margin-top: 20px !important; /* Add space below "Create New" button */
-}
-
-    /* Header & Data Cells - Enforce Borders */
-    .table th,
-    .table td {
-        padding: 12px 18px !important;
-        text-align: left !important;
-        vertical-align: middle !important;
-        border: 1px solid #ced4da !important; /* Solid borders on all sides */
-    }
-
-    /* Table Header Style */
-    .table thead {
-        background-color: #343a40 !important;
-        color: #fff !important;
-        text-transform: uppercase !important;
-    }
-
-    /* ZEBRA STRIPE IMPLEMENTATION */
-    .table tbody tr:nth-child(even) {
-        background-color: #f8f9fa !important;
-    }
-
-    .table tbody tr:nth-child(odd) {
-        background-color: #ffffff !important;
-    }
-
-/* Hover Effect */
-.table-hover tbody tr:hover {
-    background-color: #e2e6ea !important;
-    cursor: pointer !important;
-}
-
-/* =========================================== */
-/* === TABLE ACTION LINKS (The crucial override) === */
-/* =========================================== */
-
-/* Overrides the global 'a' style for links *inside* the table */
-.table td a {
-    /* Reset to be a smaller, inline button */
-    font-size: 0.8rem !important;
-    padding: 4px 8px !important;
-    margin: 2px 4px !important; /* Tighter margins */
-    font-weight: 500 !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
-    transform: none !important; /* No lift effect */
-}
-
-    /* Style for Edit link (assumed first) */
-    .table td a:first-child {
-        background-color: #ffc107 !important; /* Warning yellow */
-        color: #343a40 !important;
-        border-color: #ffc107 !important;
-    }
-
-    /* Style for Delete link (assumed last) */
-    .table td a:last-child {
-        background-color: #dc3545 !important; /* Danger red */
-        color: #ffffff !important;
-        border-color: #dc3545 !important;
-    }
-
-/* Align Action Column */
-.table td:last-child {
-    text-align: center !important; /* Center the action buttons in the cell */
 }

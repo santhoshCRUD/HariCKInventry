@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HariCKInventry.Pages.Products
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePage
     {
         private readonly AppDbContext _db;
         public IndexModel(AppDbContext db) => _db = db;
@@ -39,5 +39,16 @@ namespace HariCKInventry.Pages.Products
                 .OrderByDescending(p => p.CreatedAtUtc)
                 .ToListAsync();
         }
+        public async Task<PartialViewResult> OnGetViewProduct(int id)
+        {
+            var product = await _db.Products
+                .Include(p => p.Category)
+                .Include(p => p.SubCategory)
+                .Include(p => p.PrintingParameter)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            return Partial("_ProductDetailsPartial", product);
+        }
+
     }
 }

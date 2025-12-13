@@ -1,0 +1,170 @@
+﻿@page
+@model HariCKInventry.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="login-wrapper d-flex align-items-center justify-content-center min-vh-100">
+
+    <div class="login-card row g-0 shadow-lg">
+        <!-- LEFT SIDE (Brand / Image Section) -->
+        <div class="col-md-6 login-left d-flex flex-column justify-content-center align-items-center text-center">
+            <h1 class="brand-name mb-3">HariCK Inventory</h1>
+            <p class="brand-tagline">
+                Smart inventory management
+            </p>
+            <div class="image-placeholder">
+                <img src="~/img/3d-printer-logo-login.jpg" alt="HariCK Inventory Logo" />
+            </div>
+
+
+            
+        </div>
+
+        <!-- RIGHT SIDE (Login Form) -->
+        <div class="col-md-6 login-right p-5">
+
+            <h3 class="mb-4 fw-semibold text-center">Login</h3>
+
+            <form method="post">
+                <div class="form-group mb-3">
+                    <label asp-for="Input.Username" class="form-label"></label>
+                    <input asp-for="Input.Username" class="form-control" />
+                    <span asp-validation-for="Input.Username" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Input.Password" class="form-label"></label>
+                    <input asp-for="Input.Password" type="password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn-login w-100">
+                    Login
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- PAGE-SPECIFIC STYLES -->
+<style>
+    /* Wrapper */
+    /* .login-wrapper {
+        background: linear-gradient(135deg, #d8f3f0, #b4e0db);
+    } */
+
+    /* Main Card */
+    /* .login-card {
+        background: #fff;
+        border-radius: 18px;
+        overflow: hidden;
+        max-width: 900px;
+        width: 100%;
+    } */
+
+    /* LEFT SIDE */
+    .login-left {
+        background: aliceblue;
+        color: #ffffff;
+        padding: 40px;
+    }
+
+    .brand-name {
+        font-size: 2.2rem;
+        font-weight: 700;
+    }
+
+    .brand-tagline {
+        font-size: 0.95rem;
+        opacity: 0.9;
+        max-width: 300px;
+    }
+
+    /* =====================================================
+       BRAND LOGO – LOGIN PAGE (PREMIUM STYLE)
+       ===================================================== */
+
+    .image-placeholder {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px;
+        /* Premium effects */
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.25);
+        /* Animation */
+        animation: floatLogo 6s ease-in-out infinite;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        /* Logo image */
+        .image-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 30%;
+        }
+
+        /* Hover interaction */
+        .image-placeholder:hover {
+            transform: scale(1.08);
+            box-shadow: 0 14px 36px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.35);
+        }
+
+   
+
+   
+
+
+    /* RIGHT SIDE */
+    .login-right {
+        background: #ffffff;
+    }
+
+    /* Login Button (Rich & Clickable) */
+    .btn-login {
+        background: linear-gradient(135deg, #258cfb, #1b63c5);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+    }
+
+        /* Hover */
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 140, 251, 0.4);
+        }
+
+        /* Active */
+        .btn-login:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 8px rgba(37, 140, 251, 0.35);
+        }
+
+        /* Focus */
+        .btn-login:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37,140,251,0.35);
+        }
+        /* Login page illustration */
+.login-illustration {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+    
+</style>

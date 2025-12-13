@@ -13,6 +13,10 @@ namespace HariCKInventry.Models
         [Required, StringLength(150)]
         public string Name { get; set; } = string.Empty;
 
+        [StringLength(4000)]
+        public string Description { get; set; } = string.Empty;
+
+
         [Required]
         public int CategoryId { get; set; }
         public Category? Category { get; set; }

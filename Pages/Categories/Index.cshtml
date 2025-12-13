@@ -1,28 +1,46 @@
 ﻿@page
 @model HariCKInventry.Pages.Categories.IndexModel
+@{
+    ViewData["Title"] = "Categories";
+}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Categories</h2>
+    <a asp-page="Create" class="btn btn-primary btn-sm">
+        + Create Category
+    </a>
+</div>
 
-<h2>Categories</h2>
-<p><a asp-page="Create">Create New</a></p>
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
 
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var c in Model.Categories)
-        {
-            <tr>
-                <td>@c.Name</td>
-                <td>@c.Description</td>
-                <td>
-                    <a asp-page="Edit" asp-route-id="@c.Id">Edit</a> |
-                    <a asp-page="Delete" asp-route-id="@c.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+        <table class="table table-hover mb-0 align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th style="width: 25%;">Name</th>
+                    <th>Description</th>
+                    <th style="width: 20%;" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model.Categories)
+                {
+                    <tr>
+                        <td class="fw-semibold">@c.Name</td>
+                        <td class="text-muted">@c.Description</td>
+                        <td class="text-center">
+                            <a asp-page="Edit" asp-route-id="@c.Id"
+                               class="btn btn-outline-secondary btn-sm me-1">
+                                Edit
+                            </a>
+                            <a asp-page="Delete" asp-route-id="@c.Id"
+                               class="btn btn-outline-danger btn-sm">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

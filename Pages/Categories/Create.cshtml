@@ -3,21 +3,44 @@
 @{
     ViewData["Title"] = "Create Category";
 }
-<h2>Create Category</h2>
 
-<form method="post">
-    <div>
-        <label>Name</label>
-        <input asp-for="Category.Name" />
-        <span asp-validation-for="Category.Name"></span>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Create Category</h2>
+    <a asp-page="Index" class="btn btn-outline-secondary btn-sm">
+        ← Back to List
+    </a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+
+        <form method="post" class="row g-3">
+
+            <!-- Name -->
+            <div class="col-12">
+                <label asp-for="Category.Name" class="form-label fw-semibold"></label>
+                <input asp-for="Category.Name" class="form-control" placeholder="Enter category name" />
+                <span asp-validation-for="Category.Name" class="text-danger small"></span>
+            </div>
+
+            <!-- Description -->
+            <div class="col-12">
+                <label asp-for="Category.Description" class="form-label fw-semibold"></label>
+                <input asp-for="Category.Description" class="form-control" placeholder="Enter description" />
+                <span asp-validation-for="Category.Description" class="text-danger small"></span>
+            </div>
+
+            <!-- Actions -->
+            <div class="col-12 d-flex justify-content-end mt-3">
+                <button type="submit" class="btn btn-primary px-4">
+                    Save
+                </button>
+            </div>
+
+        </form>
+
     </div>
-    <div>
-        <label>Description</label>
-        <input asp-for="Category.Description" />
-        <span asp-validation-for="Category.Description"></span>
-    </div>
-    <button type="submit" class="btn-submit">Save</button>
-</form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

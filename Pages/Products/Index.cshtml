@@ -1,69 +1,195 @@
 ﻿@page
 @model HariCKInventry.Pages.Products.IndexModel
+@{
+    ViewData["Title"] = "Products";
+}
+<script>
+    function loadProduct(productId) {
+        return
+        const loader = document.getElementById("productDetailsLoader");
+        const content = document.getElementById("productDetailsContent");
 
-<h2>Products</h2>
-<p><a asp-page="Create">Add Product</a></p>
+        loader.classList.remove("d-none");
+        content.classList.add("d-none");
+        content.innerHTML = "";
 
-<form method="get">
-    <input type="text" name="q" value="@Model.q" placeholder="Search by name or product ID" />
-    <button type="submit">Search</button>
-    <a asp-page="Index">Clear</a>
-</form>
+        fetch(`?handler=ViewProduct&id=${productId}`)
+            .then(res => res.text())
+            .then(html => {
 
-<table>
-    <thead>
-        <tr>
-            <th>Product ID</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>SubCategory</th>
-            <th>Dims (L×W×H mm)</th>
-            <th>Weight (g)</th>
-            <th>Print Time (min)</th>
-            <th>Cost</th>
-            <th>Files</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var p in Model.Products)
-        {
-            <tr>
-                <td>@p.ProductId</td>
-                <td>@p.Name</td>
-                <td>@p.Category?.Name</td>
-                <td>@p.SubCategory?.Name</td>
-                <td>@p.Length × @p.Width × @p.Height</td>
-                <td>@p.Weight</td>
-                <td>@p.PrintTimeMinutes</td>
-                <td>@p.Cost</td>
-                <td>
-                    @if (!string.IsNullOrEmpty(p.StlPath))
+                content.innerHTML = html;
+                loader.classList.add("d-none");
+                content.classList.remove("d-none");
+
+                const modal = new bootstrap.Modal(
+                    document.getElementById("viewProductModal")
+                );
+                modal.show();
+            })
+            .catch(err => {
+                console.error(err);
+                loader.innerHTML = "Failed to load product details";
+            });
+    }
+
+    
+</script>
+
+
+<!-- Header -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Products</h2>
+    <a asp-page="Create" class="btn btn-primary">
+        + Add Product
+    </a>
+</div>
+
+<!-- Search -->
+<div class="card shadow-sm border-0 mb-3">
+    <div class="card-body">
+        <form method="get" class="row g-2 align-items-center">
+            <div class="col-md-6">
+                <input type="text"
+                       name="q"
+                       value="@Model.q"
+                       class="form-control"
+                       placeholder="Search by product name or Product ID" />
+            </div>
+            <div class="col-md-auto">
+                <button type="submit" class="btn btn-outline-primary">
+                    Search
+                </button>
+                <a asp-page="Index" class="btn btn-outline-secondary ms-2">
+                    Clear
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Products Table -->
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Sub Category</th>
+@*                         <th>Dimensions (mm)</th>
+ *@                        <th>Weight (g)</th>
+                        <th>Print Time</th>
+                        <th>Cost</th>
+                        <th>Files</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var p in Model.Products)
                     {
-                        <a href="@p.StlPath" target="_blank">STL</a>
+                        <tr>
+                            <td class="fw-semibold">@p.ProductId</td>
+                            <td>@p.Name</td>
+                            <td>@p.Category?.Name</td>
+                            <td>@p.SubCategory?.Name</td>
+                            @* <td>
+                                @p.Length × @p.Width × @p.Height
+                            </td> *@
+                            <td>@p.Weight</td>
+                            <td>@p.PrintTimeMinutes min</td>
+                            <td>₹ @p.Cost</td>
+
+                            <!-- Files -->
+                            <td>
+                                <div class="d-flex gap-2">
+                                    @if (!string.IsNullOrEmpty(p.StlPath))
+                                    {
+                                        <a href="@p.StlPath" target="_blank" class="badge bg-primary text-decoration-none">STL</a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(p.Photo1Path))
+                                    {
+                                        <a href="@p.Photo1Path" target="_blank" class="badge bg-info text-decoration-none">P1</a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(p.Photo2Path))
+                                    {
+                                        <a href="@p.Photo2Path" target="_blank" class="badge bg-info text-decoration-none">P2</a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(p.Photo3Path))
+                                    {
+                                        <a href="@p.Photo3Path" target="_blank" class="badge bg-info text-decoration-none">P3</a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(p.Photo4Path))
+                                    {
+                                        <a href="@p.Photo4Path" target="_blank" class="badge bg-info text-decoration-none">P4</a>
+                                    }
+                                </div>
+                            </td>
+
+                            <!-- Actions -->
+                            <td class="text-end">
+                                <button class="btn btn-sm btn-outline-secondary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#viewProductModal"
+                                        onclick="loadProduct(@p.Id)">
+                                    View
+                                </button>
+
+                                <a asp-page="Edit" asp-route-id="@p.Id"
+                                   class="btn btn-sm btn-outline-primary ms-1">
+                                    Edit
+                                </a>
+
+                                <a asp-page="Delete" asp-route-id="@p.Id"
+                                   class="btn btn-sm btn-outline-danger ms-1">
+                                    Delete
+                                </a>
+                            </td>
+
+                        </tr>
                     }
-                    @if (!string.IsNullOrEmpty(p.Photo1Path))
+
+                    @if (!Model.Products.Any())
                     {
-                        <a href="@p.Photo1Path" target="_blank">Photo1</a>
+                        <tr>
+                            <td colspan="10" class="text-center py-4 text-muted">
+                                No products found.
+                            </td>
+                        </tr>
                     }
-                    @if (!string.IsNullOrEmpty(p.Photo2Path))
-                    {
-                        <a href="@p.Photo2Path" target="_blank">Photo2</a>
-                    }
-                    @if (!string.IsNullOrEmpty(p.Photo3Path))
-                    {
-                        <a href="@p.Photo3Path" target="_blank">Photo3</a>
-                    }
-                    @if (!string.IsNullOrEmpty(p.Photo4Path))
-                    {
-                        <a href="@p.Photo4Path" target="_blank">Photo4</a>
-                    }
-                </td>
-                <td>
-                    <a asp-page="Edit" asp-route-id="@p.Id">Edit</a> |
-                    <a asp-page="Delete" asp-route-id="@p.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="viewProductModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Product Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div id="productDetailsLoader" class="text-center py-4" >
+                    @*<div class="spinner-border text-primary"></div> *@      
+                    <img src="~/img/cooking.gif" style="width:70px;" />
+                </div>
+                <div><span style="color:black">Not yet cooked!</span></div>
+
+                <div id="productDetailsContent" class="d-none">
+                    <!-- Partial HTML will be injected here -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,75 @@
+﻿@page
+@model HariCKInventry.Pages.Products.CreateModel
+@{
+    ViewData["Title"] = "ViewProducts";
+}
+
+<div class="container-fluid">
+
+    <div class="row mb-3">
+        <div class="col-6"><strong>Product ID:</strong></div>
+        <div class="col-6">@Model.Product.ProductId</div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-6"><strong>Name:</strong></div>
+        <div class="col-6">@Model.Product.Name</div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-6"><strong>Description:</strong></div>
+        <div class="col-6">@Model.Product.Description</div>
+    </div>
+
+    <hr />
+    <h5>Category Information</h5>
+    <div class="row mb-3">
+        <div class="col-6"><strong>Category:</strong></div>
+        <div class="col-6">@Model.Product.Category</div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-6"><strong>Sub Category:</strong></div>
+        <div class="col-6">@Model.Product.SubCategory</div>
+    </div>
+
+    <hr />
+    <h5>Dimensions & Cost</h5>
+    <div class="row mb-1">
+        <div class="col-6"><strong>Length x Width x Height:</strong></div>
+        <div class="col-6">@Model.Product.Length mm x @Model.Product.Width mm x @Model.Product.Height mm</div>
+    </div>
+    <div class="row mb-1">
+        <div class="col-6"><strong>Weight:</strong></div>
+        <div class="col-6">@Model.Product.Weight g</div>
+    </div>
+    <div class="row mb-1">
+        <div class="col-6"><strong>Print Time:</strong></div>
+        <div class="col-6">@Model.Product.PrintTimeMinutes min</div>
+    </div>
+    <div class="row mb-1">
+        <div class="col-6"><strong>Cost:</strong></div>
+        <div class="col-6">@Model.Product.Cost.ToString("C")</div>
+    </div>
+
+    <hr />
+    <h5>Printing Parameters </h5>
+    <div class="row mb-1">
+        <div class="col-6"><strong>Material / Color:</strong></div>
+        <div class="col-6">@Model.PrintingParameter.Material / @Model.PrintingParameter.Color</div>
+    </div>
+    <div class="row mb-1">
+        <div class="col-6"><strong>Layer Height:</strong></div>
+        <div class="col-6">@Model.PrintingParameter.LayerHeight</div>
+    </div>
+    <div class="row mb-1">
+        <div class="col-6"><strong>Infill Percentage:</strong></div>
+        <div class="col-6">@Model.PrintingParameter.InfillPercent %</div>
+    </div>
+    <div class="row mb-1">
+        <div class="col-6"><strong>Nozzle / Bed Temp:</strong></div>
+        <div class="col-6">@Model.PrintingParameter.NozzleTemp °C / @Model.PrintingParameter.BedTemp °C</div>
+    </div>
+    <div class="row mb-1">
+        <div class="col-6"><strong>Printer Model:</strong></div>
+        <div class="col-6">@Model.PrintingParameter.PrinterModel</div>
+    </div>
+
+</div>

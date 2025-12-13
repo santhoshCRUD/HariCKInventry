@@ -3,50 +3,100 @@
 @{
     ViewData["Title"] = "Create Product";
 }
-<h2>Create Product</h2>
+
+<div class="page-header mb-4">
+    <h2 class="fw-semibold">Create Product</h2>
+</div>
 
 <form method="post" enctype="multipart/form-data">
-    <fieldset>
-        <legend>Basic info</legend>
-        <div><label>Product ID</label><input asp-for="Product.ProductId" /><span asp-validation-for="Product.ProductId"></span></div>
-        <div><label>Name</label><input asp-for="Product.Name" /><span asp-validation-for="Product.Name"></span></div>
-        <div><label>Category</label><select asp-for="Product.CategoryId" asp-items="Model.CategoriesSelect"></select><span asp-validation-for="Product.CategoryId"></span></div>
-        <div><label>SubCategory</label><select asp-for="Product.SubCategoryId" asp-items="Model.SubCategoriesSelect"></select><span asp-validation-for="Product.SubCategoryId"></span></div>
-    </fieldset>
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-light fw-semibold">Basic Information</div>
+        <div class="card-body row g-3">
 
-    <fieldset>
-        <legend>Dimensions & cost</legend>
-        <div><label>Length (mm)</label><input asp-for="Product.Length" /><span asp-validation-for="Product.Length"></span></div>
-        <div><label>Width (mm)</label><input asp-for="Product.Width" /><span asp-validation-for="Product.Width"></span></div>
-        <div><label>Height (mm)</label><input asp-for="Product.Height" /><span asp-validation-for="Product.Height"></span></div>
-        <div><label>Weight (g)</label><input asp-for="Product.Weight" /><span asp-validation-for="Product.Weight"></span></div>
-        <div><label>Print time (min)</label><input asp-for="Product.PrintTimeMinutes" /><span asp-validation-for="Product.PrintTimeMinutes"></span></div>
-        <div><label>Cost</label><input asp-for="Product.Cost" /><span asp-validation-for="Product.Cost"></span></div>
-    </fieldset>
+            <div class="col-md-4">
+                <label class="form-label">Product ID</label>
+                <input asp-for="Product.ProductId" class="form-control" />
+                <span asp-validation-for="Product.ProductId" class="text-danger"></span>
+            </div>
 
-    <fieldset>
-        <legend>Printing parameters</legend>
-        <div><label>Material</label><input asp-for="PrintingParameter.Material" /></div>
-        <div><label>Color</label><input asp-for="PrintingParameter.Color" /></div>
-        <div><label>Layer height (mm)</label><input asp-for="PrintingParameter.LayerHeight" /></div>
-        <div><label>Infill (%)</label><input asp-for="PrintingParameter.InfillPercent" /></div>
-        <div><label>Nozzle temp (°C)</label><input asp-for="PrintingParameter.NozzleTemp" /></div>
-        <div><label>Bed temp (°C)</label><input asp-for="PrintingParameter.BedTemp" /></div>
-        <div><label>Printer model</label><input asp-for="PrintingParameter.PrinterModel" /></div>
-    </fieldset>
+            <div class="col-md-8">
+                <label class="form-label">Name</label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
 
-    <fieldset>
-        <legend>Uploads</legend>
-        <div><label>STL</label><input type="file" asp-for="StlFile" accept=".stl" /></div>
-        <div><label>Photo 1</label><input type="file" asp-for="Photo1" accept=".jpg,.jpeg,.png,.webp" /></div>
-        <div><label>Photo 2</label><input type="file" asp-for="Photo2" accept=".jpg,.jpeg,.png,.webp" /></div>
-        <div><label>Photo 3</label><input type="file" asp-for="Photo3" accept=".jpg,.jpeg,.png,.webp" /></div>
-        <div><label>Photo 4</label><input type="file" asp-for="Photo4" accept=".jpg,.jpeg,.png,.webp" /></div>
-    </fieldset>
+            <div class="col-md-8">
+                <label class="form-label">Description</label>
+                <textarea asp-for="Product.Description" class="form-control" ></textarea>
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
 
-    <button type="submit">Save</button>
+            <div class="col-md-6">
+                <label class="form-label">Category</label>
+                <select asp-for="Product.CategoryId" asp-items="Model.CategoriesSelect" class="form-select"></select>
+                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Sub Category</label>
+                <select asp-for="Product.SubCategoryId" asp-items="Model.SubCategoriesSelect" class="form-select"></select>
+                <span asp-validation-for="Product.SubCategoryId" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dimensions -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-light fw-semibold">Dimensions & Cost</div>
+        <div class="card-body row g-3">
+
+            <div class="col-md-4"><label class="form-label">Length (mm)</label><input asp-for="Product.Length" class="form-control" /></div>
+            <div class="col-md-4"><label class="form-label">Width (mm)</label><input asp-for="Product.Width" class="form-control" /></div>
+            <div class="col-md-4"><label class="form-label">Height (mm)</label><input asp-for="Product.Height" class="form-control" /></div>
+
+            <div class="col-md-4"><label class="form-label">Weight (g)</label><input asp-for="Product.Weight" class="form-control" /></div>
+            <div class="col-md-4"><label class="form-label">Print Time (min)</label><input asp-for="Product.PrintTimeMinutes" class="form-control" /></div>
+            <div class="col-md-4"><label class="form-label">Cost</label><input asp-for="Product.Cost" class="form-control" /></div>
+        </div>
+    </div>
+
+    <!-- Printing Parameters -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-light fw-semibold">Printing Parameters</div>
+        <div class="card-body row g-3">
+
+            <div class="col-md-4"><label class="form-label">Material</label><input asp-for="PrintingParameter.Material" class="form-control" /></div>
+            <div class="col-md-4"><label class="form-label">Color</label><input asp-for="PrintingParameter.Color" class="form-control" /></div>
+            <div class="col-md-4"><label class="form-label">Layer Height</label><input asp-for="PrintingParameter.LayerHeight" class="form-control" /></div>
+
+            <div class="col-md-4"><label class="form-label">Infill (%)</label><input asp-for="PrintingParameter.InfillPercent" class="form-control" /></div>
+            <div class="col-md-4"><label class="form-label">Nozzle Temp (°C)</label><input asp-for="PrintingParameter.NozzleTemp" class="form-control" /></div>
+            <div class="col-md-4"><label class="form-label">Bed Temp (°C)</label><input asp-for="PrintingParameter.BedTemp" class="form-control" /></div>
+
+            <div class="col-md-6"><label class="form-label">Printer Model</label><input asp-for="PrintingParameter.PrinterModel" class="form-control" /></div>
+        </div>
+    </div>
+
+    <!-- Uploads -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-light fw-semibold">Files</div>
+        <div class="card-body row g-3">
+
+            <div class="col-md-6"><label class="form-label">STL File</label><input type="file" asp-for="StlFile" class="form-control" /></div>
+            <div class="col-md-6"><label class="form-label">Photo 1</label><input type="file" asp-for="Photo1" class="form-control" /></div>
+            <div class="col-md-6"><label class="form-label">Photo 2</label><input type="file" asp-for="Photo2" class="form-control" /></div>
+            <div class="col-md-6"><label class="form-label">Photo 3</label><input type="file" asp-for="Photo3" class="form-control" /></div>
+            <div class="col-md-6"><label class="form-label">Photo 4</label><input type="file" asp-for="Photo4" class="form-control" /></div>
+        </div>
+    </div>
+
+    <div class="text-end">
+        <button type="submit" class="btn btn-primary px-4">Save Product</button>
+        <a asp-page="Index" class="btn btn-outline-secondary ms-2">Cancel</a>
+    </div>
 </form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+

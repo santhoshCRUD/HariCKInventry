@@ -1,4 +1,4 @@
-using HariCKInventry.Data;
+﻿using HariCKInventry.Data;
 using HariCKInventry.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,17 +20,30 @@ if (!string.IsNullOrWhiteSpace(envUrl) &&
     connectionString =
         $"Host={uri.Host};Port={port};Database={uri.AbsolutePath.Trim('/')};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true";
 }
+
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseNpgsql(connectionString));
 
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<FileStorageService>();
 
+// ✅ Add session services
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(60); // session timeout
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 var app = builder.Build();
 
 app.UseStaticFiles();
-
 app.UseRouting();
+
+// ✅ Enable session middleware BEFORE MapRazorPages
+app.UseSession();
+
 app.MapRazorPages();
 
 // Ensure DB created/migrated on startup (optional in dev)
@@ -39,5 +52,12 @@ app.MapRazorPages();
 //     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 //     db.Database.Migrate();
 // }
+
+app.MapGet("/", context =>
+{
+    context.Response.Redirect("/Login");
+    return Task.CompletedTask;
+});
+
 
 app.Run();

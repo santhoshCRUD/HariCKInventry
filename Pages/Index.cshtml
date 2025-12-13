@@ -8,48 +8,51 @@
 <div class="container py-5">
     <div class="text-center mb-4">
         <h1 class="fw-bold display-5 text-dark">
-            Welcome to <span class="text-primary" style="font-size:50px">HariCK Inventory</span>
+            <span class="text-primary" style="font-size:50px">HariCK Inventory</span>
         </h1>
         <p class="lead text-secondary mt-3">
-            Streamline your 3D printing business—manage categories, subcategories, STL files, and product photos
-            with a clean and powerful inventory system.
+            
         </p>
     </div>
 
     <!-- Info Cards -->
     <div class="row justify-content-center mt-5 g-4">
 
+        <!-- Products -->
         <div class="col-md-4">
-            <div class="card shadow-sm border-0 h-100 hover-scale">
-                <div class="card-body text-center">
-                    <i class="bi bi-boxes fs-1 text-primary"></i>
-                    <h5 class="card-title mt-3 fw-semibold">Product Management</h5>
-                    <p class="text-muted">Create, update, and organize all 3D printed products with STL and images.</p>
+            <div class="card dashboard-card h-100 text-center"
+                 onclick="location.href='@Url.Page("/Products/Index")'">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <i class="bi bi-boxes dashboard-icon text-primary"></i>
+                    <h6 class="mt-3 fw-semibold">Products</h6>
                 </div>
             </div>
         </div>
 
+        <!-- Categories -->
         <div class="col-md-4">
-            <div class="card shadow-sm border-0 h-100 hover-scale">
-                <div class="card-body text-center">
-                    <i class="bi bi-grid-1x2 fs-1 text-success"></i>
-                    <h5 class="card-title mt-3 fw-semibold">Categories & Subcategories</h5>
-                    <p class="text-muted">Easily categorize parts for smooth navigation and reporting.</p>
+            <div class="card dashboard-card h-100 text-center"
+                 onclick="location.href='@Url.Page("/Categories/Index")'">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <i class="bi bi-grid-1x2 dashboard-icon text-success"></i>
+                    <h6 class="mt-3 fw-semibold">Categories</h6>
                 </div>
             </div>
         </div>
 
+        <!-- Reports -->
         <div class="col-md-4">
-            <div class="card shadow-sm border-0 h-100 hover-scale">
-                <div class="card-body text-center">
-                    <i class="bi bi-clipboard-data fs-1 text-warning"></i>
-                    <h5 class="card-title mt-3 fw-semibold">Reports & Analytics</h5>
-                    <p class="text-muted">Get insights into your inventory, product usage, and performance trends.</p>
+            <div class="card dashboard-card h-100 text-center"
+                 onclick="location.href='@Url.Page("/Reports/Index")'">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <i class="bi bi-clipboard-data dashboard-icon text-warning"></i>
+                    <h6 class="mt-3 fw-semibold">Reports</h6>
                 </div>
             </div>
         </div>
 
     </div>
+
 </div>
 
 
@@ -57,9 +60,43 @@
 <style>
     .hover-scale {
         transition: transform 0.2s ease;
+        cursor: pointer;
     }
 
         .hover-scale:hover {
             transform: scale(1.03);
         }
+
+    /* Dashboard Icon Cards */
+    .dashboard-card {
+        border: none;
+        border-radius: 14px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        background: #ffffff;
+        min-height: 180px;
+    }
+
+        .dashboard-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+    /* Icon styling */
+    .dashboard-icon {
+        font-size: 3.2rem;
+        opacity: 0.9;
+    }
+
+    /* Text */
+    .dashboard-card h6 {
+        font-size: 1.05rem;
+        color: #343a40;
+    }
+
+    /* Accessibility */
+    .dashboard-card:active {
+        transform: scale(0.98);
+    }
+
 </style>
